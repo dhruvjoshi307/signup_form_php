@@ -1,170 +1,97 @@
-<!-- Inspiration: achrafcodes -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Signup Form</title>
-    <style>
-       * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup to Techsays</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <h1>Signup To Techsays</h1>
+      <?php
+      if($Signin == true){
+        echo'<h5>Yeah!Sign-up Successfully</h5>';
       }
-      body {
-        background-color: #ffc13d;
+      if($exists == true){
+        echo'<h5>Username Already Exists</h5>';
       }
-      .wrapper {
-       width: 31.25em;
-       position: relative;
-       margin: auto;
-       top: 1em;
+      if($ShowError == true){
+        echo'<h5>Enter the Valid Username</h5>';
       }
-      .container {
-        width: 31.25em;
-        background-color: #f8f8f8;
-        padding: 2em 3.75em;
-        border-radius: 0.7em;
-        box-shadow: 0 1em 4em rgb(71, 50, 4, 0.3);
-      }
-      .instructions {
-        background-color: #f8f8f8;
-        padding: 2em 1.8em;
-        border-radius: 0.5em;
-        font-size: 0.9em;
-        margin: 1.5em 0 1em 0;
-      }
-      .instructions li{
-          margin-bottom: 1em;
-      }
-      a {
-        display: block;
-        background-color: #000000;
-        color: #f8f8f8;
-        text-align: center;
-        padding: 1em 0;
-        border-radius: 0.3em;
-        text-decoration: none;
-      }
-      input,
-      #submit {
-        border: none;
-        outline: none;
-        display: block;
-      }
-      input {
-        width: 100%;
-        background-color: transparent;
-        margin-bottom: 2em;
-        padding: 1em 0 0.5em 0.5em;
-        border-bottom: 2px solid #202040;
-      }
-      #submit {
-        position: relative;
-        left: 0;
-        font-size: 1.1em;
-        width: 7em;
-        background-color: #ffc13d;
-        padding: 0.8em 0;
-        border-radius: 0.3em;
-        margin-top: 2em;
-      }
-      #username-error,
-      #password-error {
-        font-size: 0.8em;
-        text-align: justify;
-      }
-      #message-ref {
-        visibility: hidden;
-        font-size: 0.9em;
-        margin-top: 1.5em;
-        color: #34bd34;
-      }
-      @media screen and (max-width: 500px) {
-        .wrapper {
-          font-size: 11px;
-        }
-        .instructions {
-          font-size: 1.4em;
-        }
-        a {
-          font-size: 1.6em;
-        }
-      }
-    </style>
-      </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <input type="text" placeholder="Username" id="username" />
-        <input type="password" placeholder="Password" id="password" />
-        <button id="submit">Submit</button>
-        <p id="message-ref">Signed Up Successfully</p>
-      </div>
-      <ul class="instructions">
-        <li>
-          Username should begin with a alphabetic character, should be between 4
-          to 32 letters.
-        </li>
-        <li>Password 8 character. 1 lower 1 upper 1 special symbol 1 number</li>
-      </ul>
+      ?>
+      <form action="./signup.php" method="POST">
+      <input type="text" name ="user" id="username" placeholder="Username"/>
+      <input type="password" name="pass" id="password" placeholder="Password"/>
+      <button id="submit">Sign up</button>
+      </form> 
     </div>
-    <script>
-      let usernameRef = document.getElementById("username");
-      let passwordRef = document.getElementById("password");
-      let usernameError = document.getElementById("username-error");
-      let passwordError = document.getElementById("password-error");
-      let submitBtn = document.getElementById("submit");
-      let messageRef = document.getElementById("message-ref");
-      let isUsernameValid = () => {
-        //   "Username should begin with a alphabetic character, should be between 4 to 32 letters."
-        const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,32}/gi;
-        return usernameRegex.test(usernameRef.value);
-      };
-      let isPasswordValid = () => {
-        //   "Password 8 character. 1 lower 1 upper 1 special symbol 1 number"
-        const passwordRegex =
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
-        return passwordRegex.test(passwordRef.value);
-      };
-      usernameRef.addEventListener("input", () => {
-        if (!isUsernameValid()) {
-          messageRef.style.visibility = "hidden";
-          usernameRef.style.cssText =
-            "border-color:#fe2e2e;background-color: #ffc2c2";
+    <a href="login.php">Login To An Existing Account</a>
+    <ul class="instructions">
+      <li>
+        Username should begin with a alphabetic character, should be between 4
+        to 32 letters.
+      </li>
+      <li>Password 8 character. 1 lower 1 upper 1 special symbol 1 number</li>
+    </ul>
+  </div>
+  <script>
+    let usernameRef = document.getElementById("username");
+    let passwordRef = document.getElementById("password");
+    let usernameError = document.getElementById("username-error");
+    let passwordError = document.getElementById("password-error");
+    let submitBtn = document.getElementById("submit");
+    let messageRef = document.getElementById("message-ref");
+    let isUsernameValid = () => {
+      //   "Username should begin with a alphabetic character, should be between 4 to 32 letters."
+      const usernameRegex = /^[a-zA-Z][a-zA-Z0-9]{3,32}/gi;
+      return usernameRegex.test(usernameRef.value);
+    };
+    let isPasswordValid = () => {
+      //   "Password 8 character. 1 lower 1 upper 1 special symbol 1 number"
+      const passwordRegex =
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm;
+      return passwordRegex.test(passwordRef.value);
+    };
+    usernameRef.addEventListener("input", () => {
+      if (!isUsernameValid()) {
+        // messageRef.style.visibility = "hidden";
+        usernameRef.style.cssText =
+          "border-color:#fe2e2e;background-color: #ffc2c2";
+      } else {
+        usernameRef.style.cssText =
+          "border-color:#34bd34;background-color: #c2ffc2";
+      }
+    });
+    passwordRef.addEventListener("input", () => {
+      if (!isPasswordValid()) {
+        // messageRef.style.visibility = "hidden";
+        passwordRef.style.cssText =
+          "border-color:#fe2e2e;background-color: #ffc2c2";
+      } else {
+        passwordRef.style.cssText =
+          "border-color:#34bd34;background-color: #c2ffc2";
+      }
+    });
+    submit.addEventListener("mouseover", () => {
+      if (!isUsernameValid() || !isPasswordValid()) {
+        var containerRect = document
+          .querySelector(".container")
+          .getBoundingClientRect();
+        var submitRect = submit.getBoundingClientRect();
+        offset = submitRect.left - containerRect.left;
+
+        if (offset <= 100) {
+          submitBtn.style.transform = "translateX(16.25em)";
         } else {
-          usernameRef.style.cssText =
-            "border-color:#34bd34;background-color: #c2ffc2";
+          submitBtn.style.transform = "translateX(0)";
         }
-      });
-      passwordRef.addEventListener("input", () => {
-        if (!isPasswordValid()) {
-          messageRef.style.visibility = "hidden";
-          passwordRef.style.cssText =
-            "border-color:#fe2e2e;background-color: #ffc2c2";
-        } else {
-          passwordRef.style.cssText =
-            "border-color:#34bd34;background-color: #c2ffc2";
-        }
-      });
-      submit.addEventListener("mouseover", () => {
-        if (!isUsernameValid() || !isPasswordValid()) {
-          var containerRect = document
-            .querySelector(".container")
-            .getBoundingClientRect();
-          var submitRect = submit.getBoundingClientRect();
-          offset = submitRect.left - containerRect.left;
-          
-          if (offset <= 100) {
-            submitBtn.style.transform = "translateX(16.25em)";
-          } else {
-            submitBtn.style.transform = "translateX(0)";
-          }
-        }
-      });
-      submit.addEventListener("click", () => {
-        messageRef.style.visibility = "visible";
-      });
-    </script>
-  </body>
-</html
+      }
+    });
+    submit.addEventListener("click", () => {
+      messageRef.style.visibility = "visible";
+    });
+  </script>
+</body>
+</html>
